@@ -1,13 +1,24 @@
 #
-# In order to get the job templates you need to follow the respective order given in YAML file below
-# ORDER OF IMPORTS :
-# 1. Organization
-# 2. Credentials
-# 3. Inventory
-# 5. Projects 
-# 6. Templates
-# Only and Only this respective order will get you your job templates from one Cluster to another.
+#   In order to get the job templates you need to follow the respective order given in YAML file below
+#   ORDER OF IMPORTS :
+#   1. Organization
+#   2. Credentials
+#   3. Inventory
+#   5. Projects 
+#   6. Templates
+#   Only and Only this respective order will get you your job templates from one Cluster to another.
 #
+#   In order to get the assets file created in the json format use COPY module as follows:
+#   user the register variable as follows:
+#
+#   copy:
+#      content: "{{ export_property_name.assests }}"
+#      dest: /path/filename.json
+#      
+#   awx.awx.import:
+#      assests: "{{ lookup ('file', 'filename.json') | from_json() }}"
+# 
+
 
 
 
