@@ -1,0 +1,34 @@
+---
+ - name: Installation and Initianlization of Docker Container
+   hosts: localhost
+   gather_facts: true
+   tasks:
+   - name: Installing docker
+     package:
+      name: docker
+      state: present
+     
+   - name: checking docker version
+     shell: docker --version
+     register: v
+
+   - name: Output
+     debug:
+       msg: "{{v}}"
+
+   - name: Pulling Docker Image
+     podman_image:
+       name: docker.io/methos28/webapp
+   
+   - name: Checking the image if available
+     shell: podman images | grep webapp
+     register: output
+
+   - name: Output
+     debug:
+       msg: "{{output}}"
+       
+# The Below Module runs webapp in container on port 7777 which is then forwarded to the port number 80.
+   - name: Running the website
+     shell: podman run -p 80:7777 --name webapp -d methos28/webapp
+   
